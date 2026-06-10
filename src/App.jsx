@@ -6,6 +6,7 @@ import Orders from './pages/Orders';
 import DelayedLog from './pages/DelayedLog';
 import Preorders from './pages/Preorders';
 import Settings from './pages/Settings';
+import Horticulture from './pages/Horticulture';
 
 function PrivateRoute({ children }) {
   const { token } = useAuth();
@@ -25,8 +26,7 @@ export default function App() {
         <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route index element={<Navigate to="/orders" replace />} />
           <Route path="orders"   element={<Orders />} />
-          <Route path="delayed"  element={<DelayedLog />} />
-          <Route path="preorders" element={<Preorders />} />
+          <Route path="horticulture" element={<Horticulture />} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />

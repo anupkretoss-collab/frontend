@@ -91,18 +91,18 @@ export default function Settings() {
           <InfoRow label="Username" value="admin" />
           <InfoRow label="Role" value={<span className="inline-block bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">Super Admin</span>} />
           <InfoRow label="Status" value={<span className="inline-block bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">Active</span>} />
-          <InfoRow label="Session" value={<span className="text-xs text-slate-500">Expires in 24h</span>} />
+          {/* <InfoRow label="Session" value={<span className="text-xs text-slate-500">Expires in 24h</span>} /> */}
         </Card>
 
         {/* Shopify */}
-        <Card icon="🔗" title="Shopify Connection" sub="API integration status">
+        {/* <Card icon="🔗" title="Shopify Connection" sub="API integration status">
           <InfoRow label="Store" value={<span className="text-xs text-slate-600 font-medium">{window.location.hostname}</span>} />
           <InfoRow label="API Status" value={<span className="inline-block bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">Connected</span>} />
           <InfoRow label="Permissions" value={<span className="text-xs text-slate-500 font-mono">read_orders, write_orders</span>} />
-        </Card>
+        </Card> */}
 
         {/* Change Password */}
-        <div className="lg:col-span-2">
+        {/* <div className="lg:col-span-2">
           <Card icon="🔐" title="Change Password" sub="Update your login credentials">
             <div className="space-y-4">
               <ErrorAlert message={error} />
@@ -112,8 +112,7 @@ export default function Settings() {
                 <PwField id="nw"   label="New Password"          value={nw}   onChange={setNw}   showKey="nw" />
                 <PwField id="conf" label="Confirm New Password"  value={conf} onChange={setConf} showKey="conf" />
               </div>
-
-              {/* Strength + match */}
+              
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div />
                 <div>
@@ -152,10 +151,10 @@ export default function Settings() {
               </div>
             </div>
           </Card>
-        </div>
+        </div> */}
 
         {/* Danger Zone */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-red-100 shadow-sm overflow-hidden">
+        {/* <div className="lg:col-span-2 bg-white rounded-2xl border border-red-100 shadow-sm overflow-hidden">
           <div className="flex items-center gap-3 px-5 py-4 bg-red-50 border-b border-red-100">
             <div className="w-9 h-9 rounded-xl bg-red-100 flex items-center justify-center text-lg">⚠️</div>
             <div>
@@ -167,7 +166,7 @@ export default function Settings() {
             <DangerRow title="Sign Out" sub="End your current session" label="Sign Out" onClick={logout} />
             <DangerRow title="Clear Session Data" sub="Remove all locally stored tokens" label="Clear Data" onClick={() => { localStorage.clear(); logout(); }} />
           </div>
-        </div>
+        </div> */}
 
       </div>
     </div>

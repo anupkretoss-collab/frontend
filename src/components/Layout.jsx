@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 const NAV = [
   { section: 'Main' },
   { to: '/orders',   icon: '📦', label: 'Orders',              badge: true },
+  { to: '/horticulture', icon: '🌿', label: 'Horticulture Processing' },
   // { section: 'Preorders' },
   // { to: '/preorders', icon: '🌱', label: 'Preorder Processing' },
   // { to: '/delayed',  icon: '⏸️', label: 'Delayed Shipping Log' },
@@ -16,12 +17,14 @@ export default function Layout() {
   const { logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [orderCount, setOrderCount] = useState('—');
+  const [syncing, setSyncing] = useState(false);
   const location = useLocation();
 
   const titles = {
     '/orders':    { title: 'Orders',               sub: 'Manage your Shopify orders' },
     '/delayed':   { title: 'Delayed Shipping Log',  sub: 'Orders with deferred shipping' },
     '/preorders': { title: 'Preorder Processing',   sub: 'End-to-end batch processing' },
+    '/horticulture': { title: 'Horticulture Processing', sub: 'Multi-step horticultural order filtering' },
     '/settings':  { title: 'Settings',              sub: 'Account & preferences' },
   };
   const current = titles[location.pathname] || { title: 'Dashboard', sub: '' };
@@ -87,7 +90,7 @@ export default function Layout() {
             <button
               onClick={logout}
               title="Logout"
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-red-50 hover:text-red-500 transition text-sm"
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-red-50 hover:text-red-500 transition text-sm cursor-pointer"
             >⏻</button>
           </div>
         </div>
@@ -108,7 +111,7 @@ export default function Layout() {
         <header className="sticky top-0 z-30 bg-white border-b border-slate-200 h-14 flex items-center justify-between px-4 lg:px-6 gap-4 shadow-sm">
           <div className="flex items-center gap-3">
             <button
-              className="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-600 transition"
+              className="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-600 transition cursor-pointer"
               onClick={() => setSidebarOpen(true)}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,22 +146,19 @@ export default function Layout() {
 // Renders refresh/sync buttons only on the orders page
 function TopbarActions({ setOrderCount }) {
   const location = useLocation();
-  const isOrders = location.pathname === '/orders';
-
-  if (!isOrders) return null;
 
   // These are wired via a custom event so Orders page can handle them
   return (
     <>
-      <button
+      {/* <button
         onClick={() => window.dispatchEvent(new CustomEvent('orders:refresh'))}
         className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold rounded-lg transition"
       >
         ↻ <span className="hidden sm:inline">Refresh</span>
-      </button>
+      </button> */}
       <button
         onClick={() => window.dispatchEvent(new CustomEvent('orders:sync'))}
-        className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition"
+        className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition cursor-pointer"
       >
         ⬇ <span className="hidden sm:inline">Sync Shopify</span>
       </button>

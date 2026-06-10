@@ -3,10 +3,116 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
-  * { box-sizing: border-box; }
-  html, body { font-family: 'Inter', system-ui, sans-serif; }
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 99px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+/* Custom DatePicker Styles */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker {
+  font-family: 'Inter', sans-serif !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+  overflow: hidden;
+}
+
+.react-datepicker__header {
+  background-color: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding-top: 10px !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+}
+
+.react-datepicker__day-name {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+.react-datepicker__day--selected {
+  background-color: #4f46e5 !important;
+  border-radius: 8px !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #e0e7ff !important;
+  color: #4338ca !important;
+  border-radius: 8px !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: #f1f5f9 !important;
+  border-radius: 8px !important;
+}
+
+.react-datepicker__navigation {
+  top: 8px !important;
+}
+
+.react-datepicker-popper {
+  z-index: 999999 !important;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  overflow: visible !important;
+}
+
+.react-datepicker__close-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  right: 10px !important;
+  height: 100% !important;
+  padding: 0 !important;
+}
+
+.react-datepicker__close-icon::after {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  font-size: 12px !important;
+  padding-bottom: 4px !important;
 }

@@ -153,6 +153,26 @@ export default function Preorders() {
     setLoading(false);
   }, [state]);
 
+  // ── Step 7b: individual S/17 packing slips ─────────────────────────────
+  const openS17Slips = useCallback(async () => {
+    setLoading(true);
+    try {
+      const r = await fetch('/api/preorders/s17-packingslips', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
+        body: JSON.stringify({ orders: state.picklistOrders, shippingDate: fmtDate(state.shippingDate) }),
+      });
+      if (!r.ok) throw new Error('Failed to generate S/17 packing slips');
+      const html = await r.text();
+      const win = window.open('', '_blank');
+      win.document.write(html);
+      win.document.close();
+      win.print();
+      addLog('S/17 packing slips opened for printing.', 'success');
+    } catch (e) { addLog(e.message, 'error'); }
+    setLoading(false);
+  }, [state]);
+
   // ── Step 8: download CSV ────────────────────────────────────────────────
   const downloadCSV = useCallback(async (carrier) => {
     setLoading(true);
@@ -425,7 +445,8 @@ function StepContent({ state, set, goStep, fetchFiltered, sliceBatch, checkDelay
             className="w-full px-3 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
         </div>
         <div className="flex gap-3 flex-wrap">
-          <Btn onClick={openPackingSlip}>🖨️ Generate & Print Packing Slip</Btn>
+          <Btn onClick={openPackingSlip}>🖨️ Batch Packing Slip</Btn>
+          <Btn onClick={openS17Slips}>📦 Individual S/17 Packing Slips</Btn>
           <Btn onClick={() => goStep(8)}>Proceed to Step 8 →</Btn>
           <Btn variant="secondary" onClick={() => goStep(6)}>← Back</Btn>
         </div>
@@ -437,7 +458,7 @@ function StepContent({ state, set, goStep, fetchFiltered, sliceBatch, checkDelay
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="border border-slate-200 rounded-xl p-4 space-y-3">
             <div className="flex items-center gap-2"><span className="text-lg">📮</span><h5 className="text-sm font-bold text-slate-800">Royal Mail</h5></div>
-            <p className="text-xs text-slate-500">RM 48hr format CSV</p>
+            <p className="text-xs text-slate-500">Click &amp; Drop import format (TPS48)</p>
             <Btn onClick={() => downloadCSV('Royal Mail')}>Download Royal Mail CSV</Btn>
           </div>
           <div className="border border-slate-200 rounded-xl p-4 space-y-3">

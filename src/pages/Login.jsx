@@ -12,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true); setError('');
     try {
-      const r = await fetch('/api/auth/login', {
+      const r = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: username.trim(), password }),
@@ -73,7 +73,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold rounded-xl text-sm transition shadow-lg shadow-indigo-200 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+            className="w-full cursor-pointer py-3 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold rounded-xl text-sm transition shadow-lg shadow-indigo-200 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >
             {loading ? 'Signing in…' : 'Sign In →'}
           </button>
